@@ -36,7 +36,7 @@ var inputAddressFormatter = function (address) {
 
 var outputAbiFormatter = function(result) {
     // TODO: Implement
-    return;
+    return result;
 };
 
 module.exports = {

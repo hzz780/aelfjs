@@ -94,10 +94,18 @@ var methods = function () {
         outputFormatter: formatters.outputAbiFormatter
     });
 
+    var getBlockHeight = new Method({
+        name: 'getBlockHeight',
+        call: 'get_block_height',
+        params: [],
+        inputFormatter: []
+    });
+
     return [
         getCommands,
         connectChain,
-        getContractAbi
+        getContractAbi,
+        getBlockHeight
     ];
 };
 
