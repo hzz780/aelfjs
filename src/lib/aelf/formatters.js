@@ -24,6 +24,9 @@
 'use strict';
 
 var utils = require('../utils/utils');
+var protobuf = require('protobufjs');
+var abiDescriptor = require('./abi.proto.json')
+var ModuleMessage = protobuf.Root.fromJSON(abiDescriptor).Module;
 
 var inputAddressFormatter = function (address) {
     if (utils.isStrictAddress(address)) {
@@ -34,9 +37,12 @@ var inputAddressFormatter = function (address) {
     throw new Error('invalid address');
 };
 
-var outputAbiFormatter = function(result) {
-    // TODO: Implement
-    return result;
+var outputAbiFormatter = function (result) {
+    // var root = protobuf.Root.fromJSON(abiDescriptor);
+    // var ModuleMessage = root.Module;
+    var buffer = Buffer.from(result.abi.replace('0x', ''), 'hex');
+    result.abi = ModuleMessage.decode(buffer);
+    return result.abi;
 };
 
 module.exports = {
