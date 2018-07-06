@@ -40,7 +40,7 @@ var HttpProvider = require('./aelf/httpprovider');
 function Aelf (provider) {
     this._requestManager = new RequestManager(provider);
     this.currentProvider = provider;
-    this.chaine = new Chain(this);
+    this.chain = new Chain(this);
     this.settings = new Settings();
     this.version = {
         api: version.version

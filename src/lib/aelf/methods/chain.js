@@ -77,19 +77,19 @@ var methods = function () {
     var getCommands = new Method({
         name: 'getCommands',
         call: 'get_commands',
-        params: 0,
+        params: [],
     });
 
     var connectChain = new Method({
         name: 'connectChain',
         call: 'connect_chain',
-        params: 0,
+        params: [],
     });
 
     var getContractAbi = new Method({
         name: 'getContractAbi',
         call: 'get_contract_abi',
-        params: 1,
+        params: ['contractAddress'],
         inputFormatter: [formatters.inputAddressFormatter],
         outputFormatter: formatters.outputAbiFormatter
     });

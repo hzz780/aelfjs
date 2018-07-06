@@ -45,7 +45,7 @@ Jsonrpc.toPayload = function (method, params) {
         jsonrpc: '2.0',
         id: Jsonrpc.messageId,
         method: method,
-        params: params || []
+        params: params || {}
     };
 };
 

@@ -26,7 +26,7 @@ var errors = require('./errors');
 var Method = function (options) {
     this.name = options.name;
     this.call = options.call;
-    this.params = options.params || 0;
+    this.params = options.params || [];
     this.inputFormatter = options.inputFormatter;
     this.outputFormatter = options.outputFormatter;
     this.requestManager = null;
@@ -68,7 +68,7 @@ Method.prototype.extractCallback = function (args) {
  * @throws {Error} if it is not
  */
 Method.prototype.validateArgs = function (args) {
-    if (args.length !== this.params) {
+    if (args.length !== this.params.length) {
         throw errors.InvalidNumberOfRPCParams();
     }
 };
@@ -114,9 +114,14 @@ Method.prototype.toPayload = function (args) {
     var params = this.formatInput(args);
     this.validateArgs(params);
 
+    var objparams = new Object();
+    params.forEach(function(v, i){
+        objparams[this.params[i]] = v;
+    });
+
     return {
         method: call,
-        params: params,
+        params: objparams,
         callback: callback
     };
 };
