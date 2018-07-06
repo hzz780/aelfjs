@@ -115,9 +115,9 @@ Method.prototype.toPayload = function (args) {
     this.validateArgs(params);
 
     var objparams = new Object();
-    params.forEach(function(v, i){
-        objparams[this.params[i]] = v;
-    });
+    for(var i =0; i< params.length; i++){
+        objparams[this.params[i]] = params[i];
+    }
 
     return {
         method: call,
