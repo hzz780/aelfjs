@@ -127,7 +127,7 @@ var formatInputString = function (value, fieldNumber) {
  * @param {String} hex
  * @returns {Buffer}
  */
-var formatInputBytes = function (hex) {
+var formatInputBytes = function (hex, fieldNumber) {
     var bytes = Buffer.from(hex)
     var w = new protobuf.BufferWriter();
     // Tag
@@ -144,7 +144,7 @@ var formatInputBytes = function (hex) {
  * @param {String} hex
  * @returns {Buffer}
  */
-var formatInputHash = function (hex) {
+var formatInputHash = function (hex, fieldNumber) {
     var hash = proto.getHashFromHex(hex);
     var value = proto.Hash.encode(hash).finish();
     var w = new protobuf.BufferWriter();

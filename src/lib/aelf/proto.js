@@ -24,6 +24,7 @@ var getTransaction = function(from, to, methodName, params){
 }
 
 module.exports = {
+    getHashFromHex: getHashFromHex,
     getTransaction: getTransaction,
     encodeTransaction: encodeTransaction,
     Transaction: kernelRoot.Transaction,
