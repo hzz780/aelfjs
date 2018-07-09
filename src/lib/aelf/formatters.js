@@ -25,7 +25,7 @@
 
 var utils = require('../utils/utils');
 var protobuf = require('protobufjs');
-var abiDescriptor = require('./abi.proto.json')
+var abiDescriptor = require('./proto/abi.proto.json')
 var ModuleMessage = protobuf.Root.fromJSON(abiDescriptor).Module;
 
 var inputAddressFormatter = function (address) {

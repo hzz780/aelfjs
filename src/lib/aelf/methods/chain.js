@@ -24,6 +24,7 @@
 "use strict";
 
 var formatters = require('../formatters');
+var Contract = require('../shims/contract.js')
 var Method = require('../method');
 var c = require('../../utils/config');
 
@@ -49,6 +50,7 @@ var c = require('../../utils/config');
 
 function Chain(aelf) {
     this._requestManager = aelf._requestManager;
+    this._initialized = false;
 
     var self = this;
 
@@ -62,6 +64,47 @@ function Chain(aelf) {
         p.setRequestManager(self._requestManager);
     });
 }
+
+Object.defineProperty(Chain.prototype, 'chainId', {
+    get: function () {
+        return c.chainId;
+    },
+    set: function (val) {
+        c.chainId = val;
+        return val;
+    }
+});
+
+Object.defineProperty(Chain.prototype, 'contractZeroAddress', {
+    get: function () {
+        return c.contractZeroAddress;
+    },
+    set: function (val) {
+        c.contractZeroAddress = val;
+        return val;
+    }
+});
+
+
+Object.defineProperty(Chain.prototype, 'contractZeroAbi', {
+    get: function () {
+        return c.contractZeroAbi;
+    },
+    set: function (val) {
+        c.contractZeroAbi = val;
+        return val;
+    }
+});
+
+Object.defineProperty(Chain.prototype, 'contractZero', {
+    get: function () {
+        return c.contractZero;
+    },
+    set: function (val) {
+        c.contractZero = val;
+        return val;
+    }
+});
 
 Object.defineProperty(Chain.prototype, 'defaultAccount', {
     get: function () {
@@ -89,7 +132,7 @@ var methods = function () {
     var getContractAbi = new Method({
         name: 'getContractAbi',
         call: 'get_contract_abi',
-        params: ['contractAddress'],
+        params: ['address'],
         inputFormatter: [formatters.inputAddressFormatter],
         outputFormatter: formatters.outputAbiFormatter
     });
@@ -101,11 +144,28 @@ var methods = function () {
         inputFormatter: []
     });
 
+    var getIncrement = new Method({
+        name: 'getIncrement',
+        call: 'get_increment',
+        params: ['address'],
+        inputFormatter: [formatters.inputAddressFormatter]
+    });
+
+
+    var sendTransaction = new Method({
+        name: 'sendTransaction',
+        call: 'broadcast_tx',
+        params: ['rawtx'],
+        inputFormatter: [null]
+    });
+
     return [
         getCommands,
         connectChain,
         getContractAbi,
-        getBlockHeight
+        getBlockHeight,
+        getIncrement,
+        sendTransaction
     ];
 };
 
@@ -120,9 +180,27 @@ var properties = function () {
     ];
 };
 
-// Eth.prototype.contract = function (abi) {
-//     var factory = new Contract(this, abi);
-//     return factory;
-// };
+Chain.prototype.contract = function (abi) {
+    var factory = new Contract(this, abi);
+    return factory;
+};
+
+Chain.prototype.contractAt = function (address) {
+    var abi = this.getContractAbi(address);
+    var factory = new Contract(this, abi);
+    return factory.at(address);
+};
+
+Chain.prototype.initChainInfo = function(){
+    if(this._initialized){
+        return;
+    }
+    var chainInfo = this.connectChain().result;
+    this.chainId = chainInfo.chain_id;
+    this.contractZeroAddress = chainInfo.genesis_contract;
+    this.contractZeroAbi = this.getContractAbi(this.contractZeroAddress);
+    this.contractZero = this.contract(this.contractZeroAbi).at(this.contractZeroAddress);
+    this._initialized = true;
+}
 
 module.exports = Chain;

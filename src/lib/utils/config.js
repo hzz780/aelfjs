@@ -35,6 +35,10 @@
 
 module.exports = {
     AELF_POLLING_TIMEOUT: 1000/2,
-    defaultAccount: undefined
+    chainId: undefined,
+    contractZeroAddress: undefined,
+    contractZeroAbi: undefined,
+    contractZero: undefined,
+    defaultAccount: undefined,
 };
 
