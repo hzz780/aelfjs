@@ -111,8 +111,6 @@ ContractMethod.prototype.sendTransaction = function () {
     var callback = this.extractCallback(args);
     var payload = this.toPayload(args);
 
-    console.log(payload);
-
     if (!callback) {
         return this._chain.sendTransaction(payload);
     }
