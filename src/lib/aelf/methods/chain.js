@@ -151,6 +151,13 @@ var methods = function () {
         inputFormatter: [formatters.inputAddressFormatter]
     });
 
+    var getTxResult = new Method({
+        name: 'getTxResult',
+        call: 'get_tx_result',
+        params: ['txid'],
+        inputFormatter: []
+    });
+
 
     var sendTransaction = new Method({
         name: 'sendTransaction',
@@ -165,7 +172,8 @@ var methods = function () {
         getContractAbi,
         getBlockHeight,
         getIncrement,
-        sendTransaction
+        sendTransaction,
+        getTxResult
     ];
 };
 

@@ -6,6 +6,29 @@ var keyPair = ec.keyFromPrivate("8879cf1dc1744f0062ca9681df82613a63d647f1d34a6f7
 var privKey = keyPair.getPrivate("hex");
 var pubKey = keyPair.getPublic();
 
+// 引用Buffer库，保证browser端的使用。
+var Buffer = require('buffer').Buffer;
+
+// Todo 助记词及私钥生成，迁移比特币方案。
+
+// 和C#保持同步
+let getAddressFromPubKey = function (pubKey) {
+    let pubKeyEncoded = pubKey.encode();
+    pubKeyEncoded.length = 18;
+    let address = '';
+    pubKeyEncoded.map(item => {
+        let hex = item.toString(16);
+        if (hex.length <= 1) {
+            hex = '0' + hex;
+        }
+        address+= hex;
+    });
+    address = '0x' + address;
+    return address;
+};
+
+// let address = getAddressFromPubKey(pubKey);
+
 var signTransaction = function(rawTxn){
     rawTxn.R = null;
     rawTxn.S = null;
@@ -24,4 +47,5 @@ var signTransaction = function(rawTxn){
 
 module.exports = {
     signTransaction: signTransaction,
+    getAddressFromPubKey: getAddressFromPubKey
 };
