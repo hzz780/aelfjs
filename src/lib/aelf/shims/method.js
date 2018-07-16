@@ -85,7 +85,13 @@ ContractMethod.prototype.toPayload = function (args) {
     // options.Params = coder.encodeParams(this._paramTypes, args);
     // return options;
     var tx = wallet.signTransaction(rawtx);
-    return proto.Transaction.encode(tx).finish().toString('hex');
+    tx = proto.Transaction.encode(tx).finish();
+    if (tx.__proto__.constructor === Buffer) {
+        return tx.toString('hex');
+    } else {
+        return utils.uint8ArrayToHex(tx);
+    }
+    // return proto.Transaction.encode(tx).finish().toString('hex');
 };
 
 ContractMethod.prototype.unpackOutput = function (output) {

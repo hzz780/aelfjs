@@ -72,5 +72,9 @@ Aelf.prototype.isConnected = function(){
 
 Aelf.prototype.wallet = wallet;
 
+if (typeof window !== 'undefined' && !window.Aelf) {
+    window.Aelf = Aelf;
+}
+
 module.exports = Aelf;
 

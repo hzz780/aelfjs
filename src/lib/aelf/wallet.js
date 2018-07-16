@@ -8,6 +8,7 @@ var sha256 = require('js-sha256').sha256;
 var elliptic = require('elliptic');
 var proto = require('./proto.js');
 var ec = new elliptic.ec('secp256k1');
+var utils = require('../utils/utils');
 
 var bip39 = require('bip39');
 var createHmac = require('crypto').createHmac;
@@ -66,17 +67,12 @@ function _getWallet(type, value) {
 let getAddressFromPubKey = function (pubKey) {
     let pubKeyEncoded = pubKey.encode();
     pubKeyEncoded.length = 18;
-    let address = '';
-    pubKeyEncoded.map(item => {
-        let hex = item.toString(16);
-        if (hex.length <= 1) {
-            hex = '0' + hex;
-        }
-        address+= hex;
-    });
+    let address = utils.uint8ArrayToHex(pubKeyEncoded);
     address = '0x' + address;
     return address;
 };
+
+console.log("getAddressFromPubKey: ", getAddressFromPubKey(pubKey));
 
 let createNewWallet = function () {
     return _getWallet('createNewWallet', '');
@@ -124,6 +120,7 @@ var signTransaction = function(rawTxn){
 }
 
 module.exports = {
+    bip39: bip39,
     signTransaction: signTransaction,
     createNewWallet: createNewWallet,
     getWalletByMnemonic: getWalletByMnemonic,

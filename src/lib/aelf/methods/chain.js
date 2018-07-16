@@ -154,8 +154,8 @@ var methods = function () {
     var getTxResult = new Method({
         name: 'getTxResult',
         call: 'get_tx_result',
-        params: ['txid'],
-        inputFormatter: []
+        params: ['txhash'],
+        inputFormatter: [null]
     });
 
 

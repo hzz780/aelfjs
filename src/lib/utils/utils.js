@@ -557,6 +557,25 @@ var isTopic = function (topic) {
     return false;
 };
 
+/**
+ * Returns hex
+ *
+ * @method uint8ArrayToHex
+ * @param {Array} uint8Array
+ * @return {String}
+ */
+let uint8ArrayToHex = function (uint8Array) {
+    let string = '';
+    uint8Array.map(item => {
+        let hex = item.toString(16);
+        if (hex.length <= 1) {
+            hex = '0' + hex;
+        }
+        string+= hex;
+    });
+    return string;
+};
+
 module.exports = {
     padLeft: padLeft,
     padRight: padRight,
@@ -586,4 +605,5 @@ module.exports = {
     isJson: isJson,
     isBloom: isBloom,
     isTopic: isTopic,
+    uint8ArrayToHex: uint8ArrayToHex
 };
