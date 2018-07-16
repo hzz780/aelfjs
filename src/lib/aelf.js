@@ -36,6 +36,7 @@ var Chain = require('./aelf/methods/chain');
 var Settings = require('./aelf/settings');
 var version = require('./version.json');
 var HttpProvider = require('./aelf/httpprovider');
+var wallet = require('./aelf/wallet');
 
 function Aelf (provider) {
     this._requestManager = new RequestManager(provider);
@@ -68,6 +69,8 @@ Aelf.prototype.reset = function (keepIsSyncing) {
 Aelf.prototype.isConnected = function(){
     return (this.currentProvider && this.currentProvider.isConnected());
 };
+
+Aelf.prototype.wallet = wallet;
 
 module.exports = Aelf;
 

@@ -2,12 +2,19 @@
 // connect_chain
 // load_contract_abi
 // deploy_contract AElf.Contracts.Token 0 0x0489da3cad42c556cddf672d6719c8add3ac
-// get_tx_result return你的合约地址 比如这次是：0x75b19ac4415c072512d011634ac86a9c58cf
-// load_contract_abi 0x75b19ac4415c072512d011634ac86a9c58cf
 
-// broadcast_tx {"from":"0x0489da3cad42c556cddf672d6719c8add3ac","to":"0x75b19ac4415c072512d011634ac86a9c58cf","method":"Initialize","incr":"1","params":["s","100",1000000,10]}
+// get_tx_result 0x0439283049d3825d546edb7a86f96bf31eeb85bc4f6a7ea67768aa1d686d1c5a
+// return你的合约地址 比如这次是：0xdb458e5db5db1b0ecad3408acc344c96794c
+// load_contract_abi 0xdb458e5db5db1b0ecad3408acc344c96794c
 
-// broadcast_tx {"from":"0x0489da3cad42c556cddf672d6719c8add3ac","to":"0x75b19ac4415c072512d011634ac86a9c58cf","method":"TotalSupply","incr":"2"}
+// broadcast_tx {"from":"0x0489da3cad42c556cddf672d6719c8add3ac","to":"0x9166975b55b7c67572a2e6623795168f4430","method":"Initialize","incr":"3","params":["s","100",1000000,10]}
+// txid: 0x6dc2d050a9c140f9bea8bb59a06fea01a6f59c055afbd3f9ae596cc038feaa80
+
+// 0x167257973f84576ef759c9c2db60840ae07fb7e52b4d016006d22f323844d9d3    increment: 3
+
+
+// broadcast_tx {"from":"0x0489da3cad42c556cddf672d6719c8add3ac","to":"0x9166975b55b7c67572a2e6623795168f4430","method":"TotalSupply","incr":"2"}
+// txid: 0x7f96442d6c74ad14ec6d91c27eb947a80e24c12ffedd6dd019e0a49c5762726f
 let contract_abi = {
     "Name": "AElf.Contracts.Token.SimpleToken",
     "Methods": [

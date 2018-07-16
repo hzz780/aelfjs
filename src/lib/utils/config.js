@@ -39,6 +39,7 @@ module.exports = {
     contractZeroAddress: undefined,
     contractZeroAbi: undefined,
     contractZero: undefined,
-    defaultAccount: undefined,
+    // defaultAccount: undefined,
+    defaultAccount: '0x04bb9c6c297ea90b1bc3e6af2c87d416583e',
 };
 

@@ -1,12 +1,16 @@
 var Aelf = require('./lib/aelf.js');
 var aelf = new Aelf(new Aelf.providers.HttpProvider("http://localhost:1234"));
 
-
 // var tokenc = aelf.chain.getContractAbi('0x75b19ac4415c072512d011634ac86a9c58cf');
+aelf.chain.connectChain();
 
-var tokenc = aelf.chain.contractAt('0x75b19ac4415c072512d011634ac86a9c58cf');
+// var tokenc = aelf.chain.contractAt('0x75b19ac4415c072512d011634ac86a9c58cf');
+var tokenc = aelf.chain.contractAt('0xdb458e5db5db1b0ecad3408acc344c96794c');
+aelf.chain.getIncrement('0x04bb9c6c297ea90b1bc3e6af2c87d416583e');
+let totalSupply = tokenc.TotalSupply();
+console.log('totalSupply: ', JSON.stringify(totalSupply));
 
-tokenc.Initialize('test','hzz',10000,1);
+// tokenc.Initialize('test','hzz',10000,1);
 
 
 // aelf.chain.sendTransaction({"from":"0x0489da3cad42c556cddf672d6719c8add3ac","to":"0x75b19ac4415c072512d011634ac86a9c58cf","method":"TotalSupply","incr":"2"});
