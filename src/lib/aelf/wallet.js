@@ -13,9 +13,23 @@ var utils = require('../utils/utils');
 var bip39 = require('bip39');
 var createHmac = require('crypto').createHmac;
 
+var AES = require("crypto-js/aes");
+var encUtf8 = require("crypto-js/enc-utf8");
+
 var keyPair = ec.keyFromPrivate('47656824852262548503659408222936946855252009172219114532308126878465891939946');
 var privKey = keyPair.getPrivate("hex");
 var pubKey = keyPair.getPublic();
+
+// need crypto-js
+function encryptoPrivateKey (privateKey, password) {
+    let ciphertext = AES.encrypt(privateKey, password);
+    return ciphertext.toString();
+}
+
+function decryptoPrivateKey(privateKeyEncrypted, password) {
+    let bytes  = AES.decrypt(privateKeyEncrypted, password);
+    return bytes.toString(encUtf8);
+}
 
 function _getHDWalletMasterPrivateKey (rootSeedHex) {
     if (rootSeedHex.length == 128) {
@@ -52,6 +66,8 @@ function _getWallet(type, value) {
     // let rootSeed = bip39.mnemonicToSeedHex(mnemonic);
     // let xPrivateKey = getHDWalletMasterPrivateKey(rootSeed);
     // let keyPair = ec.keyFromPrivate(xPrivateKey);
+    // TODO 1.将私钥加密保存,用密码解密才能使用。
+    // TODO 2.将助记词机密保存,用密码解密才能获取。
     let privKey = keyPair.getPrivate("hex");
     let pubKey = keyPair.getPublic();
     let address = getAddressFromPubKey(pubKey);
@@ -124,5 +140,7 @@ module.exports = {
     signTransaction: signTransaction,
     createNewWallet: createNewWallet,
     getWalletByMnemonic: getWalletByMnemonic,
-    getWalletByPrivateKey: getWalletByPrivateKey
+    getWalletByPrivateKey: getWalletByPrivateKey,
+    encryptoPrivateKey: encryptoPrivateKey,
+    decryptoPrivateKey: decryptoPrivateKey
 };
