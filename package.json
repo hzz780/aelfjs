@@ -1,23 +1,31 @@
 {
-  "name": "hzz-aelfjs",
+  "name": "aelfjs",
   "version": "1.0.0",
-  "description": "beta aelfjs",
-  "main": "./src/lib/aelf.js",
+  "description": "aelf js library",
+  "main": "./lib/aelf.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "bignumber": "^1.1.0",
+    "bignumber.js": "^2.0.7",
+    "bip39": "^2.5.0",
+    "buffer": "^5.1.0",
+    "crypto-js": "^3.1.9-1",
+    "elliptic": "^6.4.0",
+    "js-sha256": "^0.9.0",
+    "protobufjs": "^6.8.6",
+    "utf8": "^3.0.0",
+    "xhr2-cookies": "^1.1.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hzz780/aelfjs.git"
-  },
   "keywords": [
-    "beta",
-    "aelfjs"
+    "aelf"
   ],
-  "author": "huangzongzhe,hzz780",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hzz780/aelfjs/issues"
-  },
-  "homepage": "https://github.com/hzz780/aelfjs#readme"
+  "author": "aelf",
+  "license": "MIT"
 }
