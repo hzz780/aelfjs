@@ -1,0 +1,23 @@
+{
+  "name": "hzz-aelfjs",
+  "version": "1.0.0",
+  "description": "beta aelfjs",
+  "main": "./src/lib/aelf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hzz780/aelfjs.git"
+  },
+  "keywords": [
+    "beta",
+    "aelfjs"
+  ],
+  "author": "huangzongzhe,hzz780",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hzz780/aelfjs/issues"
+  },
+  "homepage": "https://github.com/hzz780/aelfjs#readme"
+}
